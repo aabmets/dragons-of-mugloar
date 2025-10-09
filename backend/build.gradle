@@ -1,0 +1,40 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.6'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'ee.bigbank'
+version = '0.0.1-SNAPSHOT'
+description = 'Dragons of Muglore'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    implementation 'com.openai:openai-java-spring-boot-starter:4.2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+task downloadDependencies {
+    doLast {
+        configurations
+            .findAll { it.canBeResolved }
+            .each { it.resolve() }
+    }
+}
