@@ -5,8 +5,32 @@ networks:
     driver: bridge
 
 services:
+  redis:
+    image: redis:8.2
+    container_name: dragons-redis
+    command: [
+      "redis-server",
+      "--save", "60", "1",
+      "--loglevel", "notice",
+      "--port", "16379"
+    ]
+    ports:
+      - "16379:16379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "-p", "16379", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - dragons-network
+
   backend:
     container_name: dragons-backend
+    depends_on:
+      redis:
+        condition: service_healthy
     build:
       context: ..
       dockerfile: ./docker/backend.Dockerfile
@@ -15,6 +39,8 @@ services:
     environment:
       SERVER_HOST: '0.0.0.0'
       SERVER_PORT: 40022
+      REDIS_HOST: 'redis'
+      REDIS_PORT: 16379
     env_file:
       - ../.env
     ports:
