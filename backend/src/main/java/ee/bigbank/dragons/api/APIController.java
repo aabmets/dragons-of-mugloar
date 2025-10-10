@@ -1,7 +1,7 @@
 package ee.bigbank.dragons.api;
 
 import ee.bigbank.dragons.client.DragonsApiClient;
-import ee.bigbank.dragons.client.GameStartResponse;
+import ee.bigbank.dragons.client.GameState;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,10 +35,10 @@ public class APIController {
             summary = "Start a new game",
             description = "Start a new game"
     )
-    public ResponseEntity<GameStartResponse> newGame(
+    public ResponseEntity<GameState> newGame(
             @RequestParam(name = "username", defaultValue = "Anonymous") String username
     ) {
-        GameStartResponse response = dragonsApiClient.startGame();
+        GameState response = dragonsApiClient.startGame();
         String uuid = UUID.randomUUID().toString();
 
         response.setUuid(uuid);
@@ -51,7 +51,7 @@ public class APIController {
         } catch (JsonProcessingException ex) {
             throw new ResponseStatusException(
                 HttpStatus.INTERNAL_SERVER_ERROR,
-                "Failed to serialize GameStartResponse",
+                "Failed to serialize GameState",
                 ex
             );
         }

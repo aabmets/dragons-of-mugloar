@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GameStartResponse {
+public class GameState {
 
     @JsonProperty("gameId")
     private String gameId;

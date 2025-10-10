@@ -23,11 +23,11 @@ public class DragonsApiClient {
      * Makes POST to https://dragonsofmugloar.com/api/v2/game/start
      * and returns the parsed response.
      */
-    public GameStartResponse startGame() {
+    public GameState startGame() {
         return webClient.post()
                 .uri("/game/start")
                 .retrieve()
-                .bodyToMono(GameStartResponse.class)
+                .bodyToMono(GameState.class)
                 .block();
     }
 }
