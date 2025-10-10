@@ -4,10 +4,28 @@ import { mdiStar } from '@mdi/js'
 
 <template>
   <v-app>
-    <v-main class="pa-6">
-      <v-btn color="primary" :prepend-icon="mdiStar">Hello Vuetify</v-btn>
+    <v-main class="site-bg pa-6">
+      <div class="d-flex justify-center site-logo-container">
+        <v-img src="/logo.png" class="site-logo" alt="Dragons of Mugloar"/>
+      </div>
     </v-main>
   </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+html, body { height: 100%; }
+.site-bg {
+  min-height: 100vh;
+  background: url('/bg.jpg') center / cover no-repeat fixed;
+}
+.site-logo-container {
+  margin-top: 60px;
+  padding: 0 10%;
+}
+.site-logo {
+  height: auto;
+  max-height: 195px;
+  max-width: 1200px;
+  aspect-ratio: 1200 / 195;
+}
+</style>
