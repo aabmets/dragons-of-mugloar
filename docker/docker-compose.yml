@@ -2,7 +2,6 @@ name: Dragons
 
 networks:
   dragons-network:
-    name: dragons-network
     driver: bridge
 
 services:
@@ -13,10 +12,13 @@ services:
       dockerfile: ./docker/backend.Dockerfile
     volumes:
       - ../backend/src:/app/src
+    environment:
+      SERVER_HOST: '0.0.0.0'
+      SERVER_PORT: 40022
     ports:
-      - "8080:8080"
+      - "40022:40022"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:40022/actuator/health" ]
       interval: 5s
       timeout: 5s
       retries: 60
@@ -35,8 +37,11 @@ services:
       dockerfile: ./docker/frontend.Dockerfile
     volumes:
       - ../frontend:/app
+    environment:
+      SERVER_HOST: '0.0.0.0'
+      SERVER_PORT: 30011
     ports:
-      - "7070:7070"
+      - "30011:30011"
     restart: unless-stopped
     networks:
       - dragons-network
