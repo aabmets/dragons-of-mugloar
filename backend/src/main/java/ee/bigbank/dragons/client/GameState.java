@@ -18,22 +18,22 @@ public class GameState {
     private String gameId;
 
     @JsonProperty("lives")
-    private int lives;
+    private long lives;
 
     @JsonProperty("gold")
-    private int gold;
+    private long gold;
 
     @JsonProperty("level")
-    private int level;
+    private long level;
 
     @JsonProperty("score")
-    private int score;
+    private long score;
 
     @JsonProperty("highScore")
-    private int highScore;
+    private long highScore;
 
     @JsonProperty("turn")
-    private int turn;
+    private long turn;
 
     private String uuid;
     private String timestamp;

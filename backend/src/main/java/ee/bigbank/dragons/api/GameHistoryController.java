@@ -28,7 +28,7 @@ public class GameHistoryController extends APIController {
         final int take = (limit == null || limit <= 0) ? 10 : limit;
 
         Comparator<GameState> byHighScoreDesc =
-                Comparator.comparingInt(GameState::getHighScore).reversed();
+                Comparator.comparingLong(GameState::getHighScore).reversed();
 
         Stream<GameState> stream = keys.stream()
                 .map(k -> redisTemplate.opsForValue().get(k))
