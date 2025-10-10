@@ -15,6 +15,8 @@ services:
     environment:
       SERVER_HOST: '0.0.0.0'
       SERVER_PORT: 40022
+    env_file:
+      - ../.env
     ports:
       - "40022:40022"
     healthcheck:
