@@ -1,11 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { mdiStar } from '@mdi/js'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <v-app>
+    <v-main class="pa-6">
+      <v-btn color="primary" :prepend-icon="mdiStar">Hello Vuetify</v-btn>
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped></style>
