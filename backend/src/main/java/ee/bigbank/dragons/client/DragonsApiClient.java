@@ -4,7 +4,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 @Component
 public class DragonsApiClient {
@@ -21,18 +20,14 @@ public class DragonsApiClient {
 
     /**
      * Starts a new game.
-     * Makes POST https://dragonsofmugloar.com/api/v2/game/start
+     * Makes POST to https://dragonsofmugloar.com/api/v2/game/start
      * and returns the parsed response.
      */
     public GameStartResponse startGame() {
-        try {
-            return webClient.post()
-                    .uri("/game/start")
-                    .retrieve()
-                    .bodyToMono(GameStartResponse.class)
-                    .block();
-        } catch (WebClientResponseException ex) {
-            throw ex;
-        }
+        return webClient.post()
+                .uri("/game/start")
+                .retrieve()
+                .bodyToMono(GameStartResponse.class)
+                .block();
     }
 }

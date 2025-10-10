@@ -42,6 +42,7 @@ public class APIController {
         String uuid = UUID.randomUUID().toString();
 
         response.setUuid(uuid);
+        response.setUsername(username);
         response.setTimestamp(Instant.now().toString());
 
         try {

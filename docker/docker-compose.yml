@@ -4,6 +4,9 @@ networks:
   dragons-network:
     driver: bridge
 
+volumes:
+  backend-build:
+
 services:
   redis:
     image: redis:8.2
@@ -36,6 +39,7 @@ services:
       dockerfile: ./docker/backend.Dockerfile
     volumes:
       - ../backend/src:/app/src
+      - backend-build:/app/build
     environment:
       SERVER_HOST: '0.0.0.0'
       SERVER_PORT: 40022
