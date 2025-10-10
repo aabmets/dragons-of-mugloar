@@ -27,6 +27,12 @@ public class GameStartResponse {
     @JsonProperty("turn")
     private int turn;
 
+    @JsonProperty("uuid")
+    private String uuid = "";
+
+    @JsonProperty("timestamp")
+    private String timestamp = "";
+
     public String getGameId() { return gameId; }
     public void setGameId(String gameId) { this.gameId = gameId; }
 
@@ -47,4 +53,10 @@ public class GameStartResponse {
 
     public int getTurn() { return turn; }
     public void setTurn(int turn) { this.turn = turn; }
+
+    public String getUuid() { return uuid; }
+    public void setUuid(String uuid) { this.uuid = uuid; }
+
+    public String getTimestamp() { return timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
 }
