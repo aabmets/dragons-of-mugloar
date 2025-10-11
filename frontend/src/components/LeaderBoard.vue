@@ -67,7 +67,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <v-card class="mx-auto my-6 glass-card" max-width="600">
+  <v-card class="mx-auto my-6 glass-card" max-width="600" rounded="lg">
     <v-card-title class="d-flex align-center justify-space-between">
       <span class="lb-title text-h5">Leaderboard</span>
       <small v-if="lastUpdated" class="text-medium-emphasis" style="font-size: 0.9rem;">

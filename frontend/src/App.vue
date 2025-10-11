@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useMotion } from '@vueuse/motion'
-import Leaderboard from '@/components/Leaderboard.vue'
+import GameBoard from '@/components/GameBoard.vue'
+import LeaderBoard from '@/components/LeaderBoard.vue'
 import NewGameButton from '@/components/NewGameButton.vue'
 import * as utils from '@/utils'
 
@@ -22,7 +23,7 @@ const motion = useMotion(ldbRef, {
 
 async function hideLeaderboard() {
   await motion.apply('shrink')
-  await utils.sleep(300)
+  await utils.sleep(200)
   playingGame.value = true
 }
 </script>
@@ -35,11 +36,11 @@ async function hideLeaderboard() {
       </div>
       <div v-if="!playingGame" class="cta-group" ref="ldbRef">
         <NewGameButton :shrinkDurationMs=400 @new-game-started="hideLeaderboard" />
-        <Leaderboard />
+        <LeaderBoard />
       </div>
-      <div v-else>
-        GAME PLACEHOLDER
-      </div>
+      <v-fade-transition>
+        <GameBoard v-if="playingGame"/>
+      </v-fade-transition>
     </v-main>
   </v-app>
 </template>
