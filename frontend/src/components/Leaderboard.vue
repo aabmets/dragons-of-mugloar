@@ -114,7 +114,7 @@ onUnmounted(() => {
                 <th class="text-right">Level</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="rows && rows.length">
               <tr v-for="(r, idx) in rows" :key="r.uuid">
                 <td class="rank-col">
                   <div class="d-flex justify-center">
@@ -126,6 +126,11 @@ onUnmounted(() => {
                 <td class="text-right">{{ fmt.formatThousands(r.highScore) }}</td>
                 <td class="text-right">{{ fmt.formatThousands(r.gold) }}</td>
                 <td class="text-right">{{ fmt.formatThousands(r.level) }}</td>
+              </tr>
+            </tbody>
+            <tbody v-else>
+              <tr>
+                <td :colspan="5" class="empty-cell">No leaders found.</td>
               </tr>
             </tbody>
           </v-table>
@@ -148,9 +153,15 @@ onUnmounted(() => {
   text-align: center;
 }
 .glass-card {
+  min-width: 600px;
   background-color: rgba(255, 255, 255, 0.9);
 }
 .no-bg {
   background: none;
+}
+.empty-cell {
+  padding-top: 15px !important;
+  text-align: center;
+  font-weight: 500;
 }
 </style>
