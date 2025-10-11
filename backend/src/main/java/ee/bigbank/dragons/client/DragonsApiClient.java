@@ -69,4 +69,17 @@ public class DragonsApiClient {
                 .bodyToFlux(Reputation.class);
     }
 
+    /**
+     * Uses a failed purchase to skip the current turn in a game based on the provided game ID.
+     * @param gameId the unique identifier of the game where the skip turn purchase is being made.
+     * @return a {@link Purchase} object that contains information about the result of the skip turn purchase.
+     */
+    public Purchase skipTurn(String gameId) {
+        return webClient.post()
+                .uri("/{gameId}/shop/buy/skipturn", gameId)
+                .retrieve()
+                .bodyToMono(Purchase.class)
+                .block();
+    }
+
 }
