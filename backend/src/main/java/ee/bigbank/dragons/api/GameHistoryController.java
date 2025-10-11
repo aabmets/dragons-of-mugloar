@@ -27,25 +27,31 @@ public class GameHistoryController extends APIController {
         }
         final int take = (limit == null || limit <= 0) ? 10 : limit;
 
-        Comparator<GameState> byHighScoreDesc =
-                Comparator.comparingLong(GameState::getHighScore).reversed();
+        Comparator<GameState> byScoreDesc =
+                Comparator.comparingLong(GameState::getScore).reversed();
 
         Stream<GameState> stream = keys.stream()
-                .map(k -> redisTemplate.opsForValue().get(k))
-                .filter(Objects::nonNull)
-                .map(v -> {
+                .map(k -> {
                     try {
+                        String v = redisTemplate.opsForValue().get(k);
                         return objectMapper.readValue(v, GameState.class);
                     } catch (Exception e) {
                         return null;
                     }
                 })
                 .filter(Objects::nonNull)
-                .sorted(byHighScoreDesc)
+                .filter(GameHistoryController::isScored)
+                .sorted(byScoreDesc)
                 .limit(take);
 
         List<GameState> result = stream.collect(Collectors.toList());
         return ResponseEntity.ok(result);
+    }
+
+    private static boolean isScored(GameState gs) {
+        Long s = gs.getScore();
+        Long hs = gs.getHighScore();
+        return (s != null && s > 0) || (hs != null && hs > 0);
     }
 
 }
