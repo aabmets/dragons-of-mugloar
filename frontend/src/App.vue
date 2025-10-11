@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Leaderboard from '@/components/Leaderboard.vue'
+import NewGameButton from '@/components/NewGameButton.vue'
 </script>
 
 <template>
@@ -8,7 +9,10 @@ import Leaderboard from '@/components/Leaderboard.vue'
       <div class="d-flex justify-center site-logo-container">
         <v-img src="/logo.png" class="site-logo" alt="Dragons of Mugloar"/>
       </div>
-      <Leaderboard />
+      <div class="cta-group">
+        <NewGameButton :shrinkDurationMs=400 />
+        <Leaderboard />
+      </div>
     </v-main>
   </v-app>
 </template>
@@ -28,5 +32,13 @@ html, body { height: 100%; }
   max-height: 195px;
   max-width: 1200px;
   aspect-ratio: 1200 / 195;
+}
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
 }
 </style>
