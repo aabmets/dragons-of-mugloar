@@ -142,7 +142,7 @@ onUnmounted(() => {
 }
 .glass-card {
   min-width: 600px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.85);
 }
 .no-bg {
   background: none;
