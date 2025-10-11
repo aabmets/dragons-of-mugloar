@@ -72,6 +72,7 @@ services:
     environment:
       SERVER_HOST: '0.0.0.0'
       SERVER_PORT: 30011
+      BACKEND_URL: 'http://backend:40022'
     ports:
       - "30011:30011"
     restart: unless-stopped

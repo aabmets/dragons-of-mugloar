@@ -12,7 +12,14 @@ export default defineConfig({
   server: {
     host: process.env.SERVER_HOST,
     port: process.env.SERVER_PORT,
-    strictPort: true
+    strictPort: true,
+    proxy: {
+      "/api": {
+        target: process.env.BACKEND_URL,
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   },
   plugins: [
     vue({
