@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useMotion } from '@vueuse/motion'
+import { useGameStore } from '@/stores/gameStore'
+import axios from "axios";
+
+const gameStore = useGameStore()
 
 interface Props {
   color?: string
@@ -58,8 +62,16 @@ async function onClick() {
 }
 
 async function onSubmit() {
-  await formMotion.apply('shrink')
-  emit('click')
+  try {
+    const resp = await axios.post('/api/new-game', {}, {
+      params: { username: playerName.value }
+    })
+    gameStore.setGame(resp.data)
+    await formMotion.apply('shrink')
+    emit('click')
+  } catch (e) {
+    console.log(e)
+  }
 }
 </script>
 
