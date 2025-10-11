@@ -57,4 +57,16 @@ public class DragonsApiClient {
                 .block();
     }
 
+    /**
+     * Retrieves the reputation metrics for a specific game based on the provided game ID.
+     * @param gameId the unique identifier of the game for which reputation data is being requested.
+     * @return a {@link Flux} of a {@link Reputation} object, representing the reputation across factions.
+     */
+    public Flux<Reputation> getReputation(String gameId) {
+        return webClient.post()
+                .uri("/{gameId}/investigate/reputation", gameId)
+                .retrieve()
+                .bodyToFlux(Reputation.class);
+    }
+
 }
