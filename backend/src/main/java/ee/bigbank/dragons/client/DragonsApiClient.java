@@ -43,4 +43,18 @@ public class DragonsApiClient {
                 .bodyToFlux(MessageBoard.class);
     }
 
+    /**
+     * Sends a POST request to solve a specific message in a game based on the provided game ID and advertisement ID.
+     * @param gameId the unique identifier of the game where the message is located.
+     * @param adId the unique identifier of the advertisement or message to be solved.
+     * @return a {@link GameState} object reflecting the changes after solving the message.
+     */
+    public GameState solveMessage(String gameId, String adId) {
+        return webClient.post()
+                .uri("/{gameId}/solve/{adId}", gameId, adId)
+                .retrieve()
+                .bodyToMono(GameState.class)
+                .block();
+    }
+
 }
