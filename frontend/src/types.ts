@@ -12,3 +12,14 @@ export interface GameState {
   success?: boolean
   message?: string
 }
+
+export interface Advertisement {
+  adId?: string
+  message?: string
+  reward?: number
+  expiresIn?: number
+  encrypted?: number
+  probability?: string
+}
+
+export type MessageBoard = Advertisement[]
