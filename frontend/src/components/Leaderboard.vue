@@ -50,7 +50,7 @@ async function fetchLeaderboard() {
     isRefreshing.value = true
   }
   try {
-    const res = await axios.get(`/api/games-history`, { params: { limit: 10 } })
+    const res = await axios.get('/api/games-history', { params: { limit: 10 } })
     rowsRaw.value = Array.isArray(res.data) ? res.data : []
     lastUpdated.value = new Date()
     error.value = null
