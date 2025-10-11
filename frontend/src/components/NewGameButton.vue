@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useMotion } from '@vueuse/motion'
 import { useGameStore } from '@/stores/gameStore'
+import type { Game } from '@/stores/gameStore'
 import axios from "axios";
 
 const gameStore = useGameStore()
@@ -18,27 +19,15 @@ const props = withDefaults(defineProps<Props>(), {
   shrinkDurationMs: 400,
 })
 
+const emit = defineEmits<{
+  (e: 'new-game-started', payload?: Game): void
+}>()
+
 const btnRef = ref<HTMLElement | null>(null)
-const formRef = ref<HTMLElement | null>(null)
 const showingForm = ref(false)
 const playerName = ref('')
 
-const shrinkMotionConfig = {
-  shrink: {
-    scale: 0,
-    transition: {
-      duration: props.shrinkDurationMs,
-      easing: 'easeIn'
-    }
-  }
-}
-
-const formMotion = useMotion(formRef, {
-  initial: { scale: 1 },
-  ...shrinkMotionConfig,
-})
-
-const buttonMotion = useMotion(btnRef, {
+const motion = useMotion(btnRef, {
   initial: { scale: 1.15 },
   enter: {
     scale: [1, 1.15],
@@ -49,11 +38,17 @@ const buttonMotion = useMotion(btnRef, {
       easing: 'easeInOut'
     },
   },
-  ...shrinkMotionConfig,
+  shrink: {
+    scale: 0,
+    transition: {
+      duration: props.shrinkDurationMs,
+      easing: 'easeIn'
+    }
+  }
 })
 
 async function onClick() {
-  await buttonMotion.apply('shrink')
+  await motion.apply('shrink')
   showingForm.value = true
 }
 
@@ -62,9 +57,8 @@ async function onSubmit() {
     const resp = await axios.post('/api/new-game', {}, {
       params: { username: playerName.value }
     })
-    await formMotion.apply('shrink')
-    gameStore.hideLeaderboard()
     gameStore.setGame(resp.data)
+    emit('new-game-started', resp.data)
   } catch (e) {
     console.log(e)
   }
@@ -83,7 +77,6 @@ async function onSubmit() {
   <v-scale-transition>
     <v-sheet
       v-if="showingForm"
-      ref="formRef"
       :height="44"
       :width="300"
       class="space transparent"

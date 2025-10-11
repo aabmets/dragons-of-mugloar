@@ -16,17 +16,10 @@ export interface Game {
 export const useGameStore = defineStore('game-state', {
   state: () => ({
     game: null,
-    leaderboardVisible: true,
   }),
   actions: {
     setGame(payload: Game | null) {
       this.game = payload
-    },
-    hideLeaderboard() {
-      this.leaderboardVisible = false
-    },
-    showLeaderboard() {
-      this.leaderboardVisible = true
     }
   }
 })

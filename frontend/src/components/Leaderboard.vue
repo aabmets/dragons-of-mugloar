@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, computed } from 'vue'
 import Trophy from '@/components/Trophy.vue'
-import * as fmt from '@/utils/formatters'
+import * as fmt from '@/utils'
 import axios from 'axios'
 
 const REFRESH_MS = 3000

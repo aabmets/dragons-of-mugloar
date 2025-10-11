@@ -1,6 +1,30 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { useMotion } from '@vueuse/motion'
 import Leaderboard from '@/components/Leaderboard.vue'
 import NewGameButton from '@/components/NewGameButton.vue'
+import * as utils from '@/utils'
+
+const playingGame = ref(false)
+const ldbRef = ref<HTMLElement | null>(null)
+
+const motion = useMotion(ldbRef, {
+  initial: { y: 0, opacity: 1 },
+  shrink: {
+    y: 100,
+    opacity: 0,
+    transition: {
+      duration: 600,
+      easing: 'easeIn'
+    }
+  }
+})
+
+async function hideLeaderboard() {
+  await motion.apply('shrink')
+  await utils.sleep(300)
+  playingGame.value = true
+}
 </script>
 
 <template>
@@ -9,9 +33,12 @@ import NewGameButton from '@/components/NewGameButton.vue'
       <div class="d-flex justify-center site-logo-container">
         <v-img src="/logo.png" class="site-logo" alt="Dragons of Mugloar"/>
       </div>
-      <div class="cta-group">
-        <NewGameButton :shrinkDurationMs=400 />
+      <div v-if="!playingGame" class="cta-group" ref="ldbRef">
+        <NewGameButton :shrinkDurationMs=400 @new-game-started="hideLeaderboard" />
         <Leaderboard />
+      </div>
+      <div v-else>
+        GAME PLACEHOLDER
       </div>
     </v-main>
   </v-app>
