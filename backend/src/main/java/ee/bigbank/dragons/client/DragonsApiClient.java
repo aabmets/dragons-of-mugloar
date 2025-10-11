@@ -70,16 +70,29 @@ public class DragonsApiClient {
     }
 
     /**
-     * Uses a failed purchase to skip the current turn in a game based on the provided game ID.
-     * @param gameId the unique identifier of the game where the skip turn purchase is being made.
-     * @return a {@link Purchase} object that contains information about the result of the skip turn purchase.
+     * Purchase an item from the shop in a specific game.
+     * @param gameId the unique identifier of the game where the item is being purchased.
+     * @param itemId the unique identifier of the item to be purchased.
+     * @return a {@link Purchase} object containing information about the purchase result.
      */
-    public Purchase skipTurn(String gameId) {
+    public Purchase buyItem(String gameId, String itemId) {
         return webClient.post()
-                .uri("/{gameId}/shop/buy/skipturn", gameId)
+                .uri("/{gameId}/shop/buy/{itemId}", gameId, itemId)
                 .retrieve()
                 .bodyToMono(Purchase.class)
                 .block();
+    }
+
+    /**
+     * Retrieves the list of shop items available for purchase in the specified game.
+     * @param gameId the unique identifier of the game for which the shop items are being requested.
+     * @return a {@link Flux} of {@link ShopItem} objects representing the available items in the shop.
+     */
+    public Flux<ShopItem> getShopItems(String gameId) {
+        return webClient.get()
+                .uri("/{gameId}/shop", gameId)
+                .retrieve()
+                .bodyToFlux(ShopItem.class);
     }
 
 }

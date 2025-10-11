@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 public class ReputationController extends APIController {
 
     @GetMapping("/reputation")
-    @Operation(summary = "Fetch all messages from the message board")
+    @Operation(summary = "Fetch info about players reputation")
     public ResponseEntity<Flux<Reputation>> getReputation(
             @RequestParam(name = "gameId", required = true) String gameId
     ) {
