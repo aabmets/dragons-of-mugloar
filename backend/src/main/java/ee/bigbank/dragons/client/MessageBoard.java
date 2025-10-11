@@ -21,10 +21,10 @@ public class MessageBoard {
     private String message;
 
     @JsonProperty("reward")
-    private int reward;
+    private Integer reward;
 
     @JsonProperty("expiresIn")
-    private int expiresIn;
+    private Integer expiresIn;
 
     @JsonProperty("encrypted")
     private Integer encrypted;
