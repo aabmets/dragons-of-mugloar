@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mdiStar } from '@mdi/js'
+import Leaderboard from '@/components/Leaderboard.vue'
 </script>
 
 <template>
@@ -8,6 +8,7 @@ import { mdiStar } from '@mdi/js'
       <div class="d-flex justify-center site-logo-container">
         <v-img src="/logo.png" class="site-logo" alt="Dragons of Mugloar"/>
       </div>
+      <Leaderboard />
     </v-main>
   </v-app>
 </template>
