@@ -18,10 +18,6 @@ const props = withDefaults(defineProps<Props>(), {
   shrinkDurationMs: 400,
 })
 
-const emit = defineEmits<{
-  (e: 'click'): void
-}>()
-
 const btnRef = ref<HTMLElement | null>(null)
 const formRef = ref<HTMLElement | null>(null)
 const showingForm = ref(false)
@@ -66,9 +62,9 @@ async function onSubmit() {
     const resp = await axios.post('/api/new-game', {}, {
       params: { username: playerName.value }
     })
-    gameStore.setGame(resp.data)
     await formMotion.apply('shrink')
-    emit('click')
+    gameStore.hideLeaderboard()
+    gameStore.setGame(resp.data)
   } catch (e) {
     console.log(e)
   }
