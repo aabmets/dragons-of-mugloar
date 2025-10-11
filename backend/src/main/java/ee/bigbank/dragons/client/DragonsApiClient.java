@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 
 @Component
 public class DragonsApiClient {
@@ -19,9 +20,8 @@ public class DragonsApiClient {
     }
 
     /**
-     * Starts a new game.
-     * Makes POST to https://dragonsofmugloar.com/api/v2/game/start
-     * and returns the parsed response.
+     * Sends a POST request to the "/game/start" endpoint to initiate a new game.
+     * @return a {@link GameState} object containing the initial game state information.
      */
     public GameState startGame() {
         return webClient.post()
@@ -30,4 +30,17 @@ public class DragonsApiClient {
                 .bodyToMono(GameState.class)
                 .block();
     }
+
+    /**
+     * Retrieves the message board for a specific game based on the provided game ID.
+     * @param gameId the unique identifier of the game for which the message board is being requested.
+     * @return a {@link MessageBoard} object containing the messages associated with the game.
+     */
+    public Flux<MessageBoard> getMessageBoard(String gameId) {
+        return webClient.get()
+                .uri("/{gameId}/messages", gameId)
+                .retrieve()
+                .bodyToFlux(MessageBoard.class);
+    }
+
 }
