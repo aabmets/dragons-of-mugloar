@@ -79,7 +79,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <v-card class="mx-auto my-6" max-width="600" style="opacity: 0.9;">
+  <v-card class="mx-auto my-6 glass-card" max-width="600">
     <v-card-title class="d-flex align-center justify-space-between">
       <span class="lb-title text-h5">Leaderboard</span>
       <small v-if="lastUpdated" class="text-medium-emphasis" style="font-size: 0.9rem;">
@@ -87,7 +87,7 @@ onUnmounted(() => {
       </small>
     </v-card-title>
 
-    <v-card-text class="position-relative">
+    <v-card-text class="position-relative no-bg">
       <div v-if="isFirstLoad" class="d-flex justify-center py-6">
         <v-progress-circular indeterminate />
       </div>
@@ -103,8 +103,8 @@ onUnmounted(() => {
           {{ error }}
         </v-alert>
 
-        <div class="position-relative">
-          <v-table density="comfortable">
+        <div class="position-relative no-bg">
+          <v-table density="comfortable" class="no-bg">
             <thead>
               <tr>
                 <th class="text-center rank-col">Rank</th>
@@ -146,5 +146,11 @@ onUnmounted(() => {
   padding-left: 0;
   padding-right: 0;
   text-align: center;
+}
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.no-bg {
+  background: none;
 }
 </style>
