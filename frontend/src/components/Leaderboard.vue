@@ -1,23 +1,11 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, computed } from 'vue'
+import type { GameState } from '@/types'
 import Trophy from '@/components/Trophy.vue'
 import * as fmt from '@/utils'
 import axios from 'axios'
 
 const REFRESH_MS = 3000
-
-type GameState = {
-  uuid?: string
-  timestamp?: string
-  username?: string
-  gameId?: string
-  lives?: number
-  gold?: number
-  level?: number
-  score?: number
-  highScore?: number
-  turn?: number
-}
 
 const isFirstLoad = ref(true)
 const isRefreshing = ref(false)
@@ -37,7 +25,7 @@ const rows = computed(() =>
       return {
         username: rr.username,
         highScore: rr.highScore,
-        gold: rr.gold,
+        score: rr.score,
         level: rr.level,
         uuid: rr.uuid,
       }
@@ -109,8 +97,8 @@ onUnmounted(() => {
               <tr>
                 <th class="text-center rank-col">Rank</th>
                 <th class="text-left">Player</th>
-                <th class="text-right">High&nbsp;Score</th>
-                <th class="text-right">Gold</th>
+                <th class="text-right">High Score</th>
+                <th class="text-right">Score</th>
                 <th class="text-right">Level</th>
               </tr>
             </thead>
@@ -124,7 +112,7 @@ onUnmounted(() => {
                 </td>
                 <td>{{ r.username }}</td>
                 <td class="text-right">{{ fmt.formatThousands(r.highScore) }}</td>
-                <td class="text-right">{{ fmt.formatThousands(r.gold) }}</td>
+                <td class="text-right">{{ fmt.formatThousands(r.score) }}</td>
                 <td class="text-right">{{ fmt.formatThousands(r.level) }}</td>
               </tr>
             </tbody>
