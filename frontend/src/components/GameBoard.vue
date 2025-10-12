@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import StatusDisplay from '@/components/StatusDisplay.vue'
 import MessageBoard from '@/components/MessageBoard.vue'
 import { mdiArrowDown } from '@mdi/js'
 import type * as t from '@/types'
@@ -18,6 +19,7 @@ const sortItems = [
   <v-sheet class="mx-auto my-6 glass-sheet" max-width="600" rounded="lg">
     <div class="toolbar-top">
       <img src="/avatar.png" alt="avatar" class="avatar" />
+      <StatusDisplay />
 
       <div class="sort-stack">
         <v-select
@@ -50,7 +52,7 @@ const sortItems = [
 
 <style scoped>
 .avatar {
-  margin: 20px 20px  0 20px ;
+  margin: 20px 0 0 20px ;
   padding: 3px;
   border: 2px solid #ccc;
   border-radius: 4px;
