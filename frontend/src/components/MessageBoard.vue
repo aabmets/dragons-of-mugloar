@@ -80,6 +80,7 @@ onMounted(() => {
 .message-board {
   width: 100%;
   padding: 20px;
+  height: 100%;
 }
 
 /* Animated list */

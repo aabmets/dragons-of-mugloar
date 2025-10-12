@@ -16,7 +16,7 @@ const sortItems = [
 <template>
   <v-sheet class="mx-auto my-6 glass-sheet" max-width="600" rounded="lg">
     <div class="board-toolbar">
-      <div class="toolbar-left">
+      <div class="toolbar-top">
         <v-select
           v-model="sortKey"
           :items="sortItems"
@@ -45,6 +45,7 @@ const sortItems = [
 <style scoped>
 .message-board {
   width: 100%;
+  height: 67vh;
   background: none;
 }
 
@@ -62,7 +63,7 @@ const sortItems = [
   margin-bottom: 12px;
 }
 
-.toolbar-left {
+.toolbar-top {
   display: flex;
   align-items: center;
 }
