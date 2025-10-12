@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useMotion } from '@vueuse/motion'
 import { useGameStore } from '@/stores/gameStore'
-import type { Game } from '@/stores/gameStore'
+import type * as t from '@/types'
 import axios from "axios";
 
 const gameStore = useGameStore()
@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  (e: 'new-game-started', payload?: Game): void
+  (e: 'new-game-started', payload?: t.GameState): void
 }>()
 
 const btnRef = ref<HTMLElement | null>(null)

@@ -23,3 +23,6 @@ export interface Advertisement {
 }
 
 export type MessageBoard = Advertisement[]
+
+export type SortKey = 'probability' | 'reward' | 'expiresIn'
+export type SortDir = 'asc' | 'desc'

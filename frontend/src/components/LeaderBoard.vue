@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, computed } from 'vue'
-import type { GameState } from '@/types'
 import Trophy from '@/components/Trophy.vue'
+import type * as t from '@/types'
 import * as fmt from '@/utils'
 import axios from 'axios'
 
@@ -10,7 +10,7 @@ const REFRESH_MS = 3000
 const isFirstLoad = ref(true)
 const isRefreshing = ref(false)
 const error = ref<string | null>(null)
-const rowsRaw = ref<GameState[]>([])
+const rowsRaw = ref<t.GameState[]>([])
 const lastUpdated = ref<Date | null>(null)
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
   hour: '2-digit', minute: '2-digit', second: '2-digit'
