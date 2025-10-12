@@ -61,7 +61,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-sheet class="mx-auto my-6" max-width="600" rounded="lg">
+  <div class="message-board">
     <div v-if="error" class="error">{{ error }}</div>
 
     <TransitionGroup name="ads" tag="div" class="ads-list">
@@ -73,10 +73,14 @@ onMounted(() => {
     <div v-if="!rowsSorted.length && !error" class="empty">
       No messages yet.
     </div>
-  </v-sheet>
+  </div>
 </template>
 
 <style scoped>
+.message-board {
+  width: 100%;
+}
+
 /* Animated list */
 .ads-enter-active, .ads-leave-active {
   transition: all 0.4s ease;
