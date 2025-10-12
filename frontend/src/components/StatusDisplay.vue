@@ -19,8 +19,8 @@ const gameStore = useGameStore()
       <span class="pill-value">{{ gameStore.game?.level }}</span>
     </v-row>
     <v-row>
-      <img src="/stopwatch.png" alt="turn" class="pill-icon" title="Turn"/>
-      <span class="pill-value">{{ gameStore.game?.turn }}</span>
+      <img src="/trophy.png" alt="turn" class="pill-icon" title="Score"/>
+      <span class="pill-value">{{ gameStore.game?.score }}</span>
     </v-row>
   </v-container>
 </template>
