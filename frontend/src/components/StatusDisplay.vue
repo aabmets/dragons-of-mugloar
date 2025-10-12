@@ -30,6 +30,7 @@ const gameStore = useGameStore()
   width: 20px;
   height: 20px;
   display: block;
+  transform: translateY(2px);
 }
 
 .pill-value {
