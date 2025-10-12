@@ -31,14 +31,22 @@ async function onClick() {
       </div>
 
       <div class="ad-meta">
-        <div class="pill">
-          <span class="pill-value">{{ ad.reward }}</span>
-          <img src="/coin.png" alt="coin" class="pill-icon" />
-        </div>
-        <div class="pill">
-          <span class="pill-value">{{ ad.expiresIn }}</span>
-          <img src="/stopwatch.png" alt="stopwatch" class="pill-icon" />
-        </div>
+        <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left">
+          <template #activator="{ props: act }">
+            <div class="pill" v-bind="act">
+              <img class="pill-icon" src="/coin.png" alt="coin" />
+              <span class="pill-value">{{ ad.reward }}</span>
+            </div>
+          </template>
+        </v-tooltip>
+        <v-tooltip :text="`Expires in: ${ad.expiresIn} turns`" location="left">
+          <template #activator="{ props: act }">
+            <div class="pill" v-bind="act">
+              <img class="pill-icon" src="/stopwatch.png" alt="stopwatch" />
+              <span class="pill-value">{{ ad.expiresIn }}</span>
+            </div>
+          </template>
+        </v-tooltip>
       </div>
 
       <DifficultyRating :probability="props.ad.probability" />
