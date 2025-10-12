@@ -31,7 +31,7 @@ async function onClick() {
       </div>
 
       <div class="ad-meta">
-        <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left">
+        <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left" open-delay="80">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
               <img class="pill-icon" src="/coin.png" alt="coin" />
@@ -39,7 +39,7 @@ async function onClick() {
             </div>
           </template>
         </v-tooltip>
-        <v-tooltip :text="`Expires in: ${ad.expiresIn} turns`" location="left">
+        <v-tooltip :text="`Expires in: ${ad.expiresIn} turns`" location="left" open-delay="80">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
               <img class="pill-icon" src="/stopwatch.png" alt="stopwatch" />
