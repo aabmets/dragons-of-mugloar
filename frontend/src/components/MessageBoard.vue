@@ -72,7 +72,7 @@ watch(
 
 <template>
   <div class="message-board">
-    <div v-if="error" class="error">{{ error }}</div>
+    <div v-if="error && gameStore.game.lives !== 0" class="error">{{ error }}</div>
 
     <TransitionGroup name="ads" tag="div" class="ads-list">
       <div v-for="ad in rowsSorted" :key="ad.adId" class="ad-wrapper">
