@@ -17,6 +17,7 @@ const sortItems = [
   <v-sheet class="mx-auto my-6 glass-sheet" max-width="600" rounded="lg">
     <div class="board-toolbar">
       <div class="toolbar-top">
+        <img src="/avatar.png" alt="avatar" class="avatar" />
         <v-select
           v-model="sortKey"
           :items="sortItems"
@@ -43,9 +44,21 @@ const sortItems = [
 </template>
 
 <style scoped>
+.avatar {
+  margin: 20px 20px  0 20px ;
+  padding: 3px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  width: 100px;
+  height: 100px;
+  display: block;
+  background-image: linear-gradient(135deg, #52C2F4, #7444C7);
+}
+
 .message-board {
   width: 100%;
-  height: 67vh;
+  height: 65.5vh;
+  padding-top: 5px;
   background: none;
 }
 
