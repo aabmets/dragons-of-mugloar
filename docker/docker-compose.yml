@@ -29,6 +29,23 @@ services:
     networks:
       - dragons-network
 
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: dragons-redis-insight
+    ports:
+      - "15540:15540"
+    environment:
+      RI_APP_HOST: 0.0.0.0
+      RI_APP_PORT: 15540
+      RI_REDIS_HOST: redis
+      RI_REDIS_PORT: 16379
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - dragons-network
+
   backend:
     container_name: dragons-backend
     depends_on:

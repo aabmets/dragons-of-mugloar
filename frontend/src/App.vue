@@ -4,6 +4,7 @@ import { useMotion } from '@vueuse/motion'
 import GameBoard from '@/components/GameBoard.vue'
 import LeaderBoard from '@/components/LeaderBoard.vue'
 import NewGameButton from '@/components/NewGameButton.vue'
+import FloatingDock from '@/components/FloatingDock.vue'
 import * as utils from '@/utils'
 
 const playingGame = ref(false)
@@ -43,6 +44,7 @@ async function hideLeaderboard() {
       </v-fade-transition>
     </v-main>
   </v-app>
+  <FloatingDock />
 </template>
 
 <style scoped>
