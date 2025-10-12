@@ -79,6 +79,7 @@ onMounted(() => {
 <style scoped>
 .message-board {
   width: 100%;
+  padding: 20px;
 }
 
 /* Animated list */
@@ -97,6 +98,8 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .ad-wrapper {
