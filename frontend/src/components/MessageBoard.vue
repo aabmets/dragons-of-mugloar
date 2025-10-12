@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import axios from 'axios'
 import MessageCard from '@/components/MessageCard.vue'
 import { useGameStore } from '@/stores/gameStore'
@@ -11,7 +11,7 @@ const props = defineProps<{
   sortDir: t.SortDir,
 }>()
 
-const store = useGameStore()
+const gameStore = useGameStore()
 const rowsRaw = ref<MessageBoard>([])
 const error = ref<string | null>(null)
 
@@ -43,10 +43,10 @@ const rowsSorted = computed<Advertisement[]>(() => {
 })
 
 async function fetchMessages() {
-  if (!store.game?.gameId) return
+  if (!gameStore.game?.gameId) return
   try {
     const res = await axios.get('/api/messages', {
-      params: { gameId: store.game.gameId }
+      params: { gameId: gameStore.game.gameId }
     })
     rowsRaw.value = res.data || []
     error.value = null
@@ -58,6 +58,16 @@ async function fetchMessages() {
 onMounted(() => {
   fetchMessages()
 })
+
+watch(
+  () => gameStore.game?.turn,
+  (newTurn, oldTurn) => {
+    if (newTurn !== oldTurn && newTurn != null) {
+      fetchMessages()
+    }
+  },
+  { immediate: false }
+)
 </script>
 
 <template>
