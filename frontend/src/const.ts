@@ -3,9 +3,10 @@ export const PROBABILITIES = [
   'Walk in the park',
   'Sure thing',
   'Quite likely',
-  'Hmmm....',
   'Gamble',
+  'Hmmm....',
   'Risky',
   'Rather detrimental',
   'Playing with fire',
+  'Suicide mission',
 ]
