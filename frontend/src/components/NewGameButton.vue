@@ -87,7 +87,6 @@ async function onSubmit() {
           label="Enter Player Name (Optional)"
           variant="solo"
           clearable
-          autofocus
           @keyup.enter="onSubmit"
         />
         <v-btn color="primary" :height="56" @click="onSubmit">
