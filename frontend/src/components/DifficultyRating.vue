@@ -37,14 +37,17 @@ const displayProbability = computed(() =>
           readonly
           size="small"
           density="compact"
-          class="mr-2"
-        >
-          <template #item="{ isFilled, props: iconProps, index }">
-            <v-icon
-              v-bind="iconProps"
-              :color="isFilled ? starColor : 'grey-darken-2'"
-            />
-          </template>
+          class="mr-2">
+            <template #item="{ isFilled, props }">
+              <span
+                v-bind="props"
+                class="tick"
+                :style="{
+                  color: isFilled ? starColor : undefined,
+                  opacity: isFilled ? 1 : 0.35
+                }"
+              >█</span>
+            </template>
         </v-rating>
       </div>
     </template>
@@ -55,5 +58,11 @@ const displayProbability = computed(() =>
 .difficulty {
   display: inline-flex;
   align-items: center;
+}
+.tick {
+  display: inline-block;
+  line-height: 1;
+  margin-right: 1px;
+  transform: scale3d(0.9, 1, 1)
 }
 </style>
