@@ -32,8 +32,14 @@ async function hideLeaderboard() {
 <template>
   <v-app>
     <v-main class="site-bg pa-6">
-      <div class="d-flex justify-center site-logo-container">
-        <v-img src="/logo.png" class="site-logo" alt="Dragons of Mugloar"/>
+      <div
+        class="d-flex justify-center"
+        :class="['site-logo-container', { 'site-logo-container--small': playingGame }]">
+          <v-img
+            src="/logo.png"
+            :class="['site-logo', { 'site-logo--small': playingGame }]"
+            alt="Dragons of Mugloar"
+          />
       </div>
       <div v-if="!playingGame" class="cta-group" ref="ldbRef">
         <NewGameButton :shrinkDurationMs=400 @new-game-started="hideLeaderboard" />
@@ -54,14 +60,22 @@ html, body { height: 100%; }
   background: url('/bg.jpg') center / cover no-repeat fixed;
 }
 .site-logo-container {
+  transition: margin-top 0.5s ease, transform 0.5s ease;
   margin-top: 60px;
   padding: 0 10%;
 }
+.site-logo-container--small {
+  margin-top: 10px;
+}
 .site-logo {
+  transition: max-height 0.5s ease, transform 0.5s ease;
   height: auto;
   max-height: 195px;
   max-width: 1200px;
   aspect-ratio: 1200 / 195;
+}
+.site-logo--small {
+  max-height: 100px;
 }
 .cta-group {
   display: flex;
