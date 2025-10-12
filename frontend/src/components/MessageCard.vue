@@ -1,10 +1,26 @@
 <script setup lang="ts">
+import axios from 'axios'
 import DifficultyRating from '@/components/DifficultyRating.vue'
+import { useGameStore } from '@/stores/gameStore'
 import type * as t from '@/types'
 
 const props = defineProps<{
   ad: t.Advertisement
 }>()
+
+const gameStore = useGameStore()
+
+async function onClick() {
+  try {
+    const resp = await axios.post('/api/solve-message', {}, {
+      params: { uuid: gameStore.game.uuid, adId: props.ad.adId }
+    })
+    console.log(resp.data)
+    gameStore.setGame(resp.data)
+  } catch (e) {
+    console.log(e)
+  }
+}
 </script>
 
 <template>
@@ -26,6 +42,13 @@ const props = defineProps<{
       </div>
 
       <DifficultyRating :probability="props.ad.probability" />
+      <v-btn
+        color="brown-lighten-4"
+        size="small"
+        rounded="xl"
+        @click="onClick">
+          Solve
+      </v-btn>
     </div>
   </v-card>
 </template>
@@ -38,7 +61,7 @@ const props = defineProps<{
 
 .ad-row {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
   align-items: center;
   gap: 12px;
 }
