@@ -20,6 +20,7 @@ export interface Advertisement {
   expiresIn?: number
   encrypted?: number
   probability?: string
+  decodedWith?: string
 }
 
 export type MessageBoard = Advertisement[]

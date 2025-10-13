@@ -3,12 +3,14 @@ import axios from 'axios'
 import DifficultyRating from '@/components/DifficultyRating.vue'
 import { useGameStore } from '@/stores/gameStore'
 import type * as t from '@/types'
+import * as utils from '@/utils'
 
 const props = defineProps<{
   ad: t.Advertisement
 }>()
 
 const gameStore = useGameStore()
+const isTrap = utils.isTrapAdvert(props.ad)
 
 async function onClick() {
   try {
@@ -30,6 +32,24 @@ async function onClick() {
       </div>
 
       <div class="ad-meta">
+        <div v-if="isTrap">
+          <v-tooltip text="Ambush alert!" location="left" open-delay="300">
+            <template #activator="{ props: act }">
+              <div class="pill trap" v-bind="act">
+                <span class="pill-value">TRAP</span>
+              </div>
+            </template>
+          </v-tooltip>
+        </div>
+        <div v-if="ad.decodedWith">
+          <v-tooltip :text="`Decoded with ${ad.decodedWith} algorithm`" location="left" open-delay="300">
+            <template #activator="{ props: act }">
+              <div class="pill" v-bind="act">
+                <span class="pill-value">{{ ad.decodedWith }}</span>
+              </div>
+            </template>
+          </v-tooltip>
+        </div>
         <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left" open-delay="300">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
@@ -61,6 +81,11 @@ async function onClick() {
 </template>
 
 <style scoped>
+.trap {
+  background-color: #ff0000 !important;
+  color: #ffffff !important;
+}
+
 .ad-card {
   border-radius: 16px;
   padding: 8px 12px;

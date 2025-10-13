@@ -127,7 +127,7 @@ const sortItems = [
 
 .glass-sheet {
   min-width: 1000px;
-  min-height: 400px;
+  min-height: 50vh;
   background-color: rgba(255, 255, 255, 0.9);
 }
 

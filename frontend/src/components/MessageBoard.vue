@@ -12,7 +12,7 @@ const props = defineProps<{
 }>()
 
 const gameStore = useGameStore()
-const rowsRaw = ref<MessageBoard>([])
+const rowsRaw = ref<t.MessageBoard>([])
 const error = ref<string | null>(null)
 
 function probToNumber(p?: string) {
@@ -20,7 +20,7 @@ function probToNumber(p?: string) {
   return idx >= 0 ? idx + 1 : -1
 }
 
-const rowsSorted = computed<Advertisement[]>(() => {
+const rowsSorted = computed<t.MessageBoard>(() => {
   const arr = [...rowsRaw.value]
   const key = props.sortKey
   const dir = props.sortDir === 'asc' ? 1 : -1

@@ -35,6 +35,9 @@ public class MessageBoard {
     @JsonProperty("probability")
     private String probability;
 
+    @JsonProperty("decodedWith")
+    private String decodedWith;
+
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
         "Piece of cake",
         "Walk in the park",
@@ -57,11 +60,13 @@ public class MessageBoard {
             @JsonProperty("reward") int reward,
             @JsonProperty("expiresIn") int expiresIn,
             @JsonProperty("encrypted") Integer encrypted,
-            @JsonProperty("probability") String probability
+            @JsonProperty("probability") String probability,
+            @JsonProperty("decodedWith") String decodedWith
     ) {
         this.reward = reward;
         this.expiresIn = expiresIn;
         this.encrypted = encrypted;
+        this.decodedWith = decodedWith;
 
         if (isEncryptedFlagSet(encrypted)) {
             String decoded = b64dec(probability);
@@ -69,17 +74,18 @@ public class MessageBoard {
                 this.adId = b64dec(adId);
                 this.message = b64dec(message);
                 this.probability = decoded;
+                this.decodedWith = "base64";
             } else {
                 this.adId = rot13dec(adId);
                 this.message = rot13dec(message);
                 this.probability = rot13dec(probability);
+                this.decodedWith = "rot13";
             }
         } else {
             this.adId = adId;
             this.message = message;
             this.probability = probability;
         }
-
     }
 
     private boolean isEncryptedFlagSet(Object encrypted) {
