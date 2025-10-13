@@ -9,6 +9,7 @@ export const PROBABILITIES = [
   'Rather detrimental',
   'Playing with fire',
   'Suicide mission',
+  'Impossible',
 ]
 
 export const PRODUCTS = {

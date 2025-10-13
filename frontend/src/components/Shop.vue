@@ -26,7 +26,7 @@ watch(
       fetchReputation()
     }
   },
-  { immediate: true }
+  { immediate: false }
 )
 </script>
 

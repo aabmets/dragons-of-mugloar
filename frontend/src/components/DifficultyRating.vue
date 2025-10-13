@@ -61,8 +61,6 @@ const displayProbability = computed(() =>
 }
 .tick {
   display: inline-block;
-  line-height: 1;
-  margin-right: 1px;
-  transform: scale3d(0.9, 1, 1)
+  transform: scale3d(0.8, 1.1, 1)
 }
 </style>

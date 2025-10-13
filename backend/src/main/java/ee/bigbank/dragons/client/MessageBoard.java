@@ -45,7 +45,8 @@ public class MessageBoard {
         "Risky",
         "Rather detrimental",
         "Playing with fire",
-        "Suicide mission"
+        "Suicide mission",
+        "Impossible"
     ));
 
     @JsonCreator
