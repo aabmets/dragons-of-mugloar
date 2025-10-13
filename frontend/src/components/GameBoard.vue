@@ -25,7 +25,9 @@ const sortItems = [
       </div>
 
       <div class="toolbar-center">
+        <img src="/dragon.png" alt="dragon" class="dragon"/>
         <Shop />
+        <img src="/dragon.png" alt="dragon" class="dragon-reverse"/>
       </div>
 
       <div class="toolbar-right">
@@ -91,6 +93,20 @@ const sortItems = [
   height: 100px;
   display: block;
   background-image: linear-gradient(135deg, #52C2F4, #7444C7);
+}
+
+.dragon {
+  height: 100px;
+  opacity: 0.15;
+  pointer-events: none;
+  transform: scaleX(1.2) translateX(5px);
+}
+
+.dragon-reverse {
+  height: 100px;
+  opacity: 0.15;
+  pointer-events: none;
+  transform: scaleX(-1.2) translateX(5px);
 }
 
 .message-board {
