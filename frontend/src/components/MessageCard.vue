@@ -73,6 +73,7 @@ async function onClick() {
         color="brown-lighten-4"
         size="small"
         rounded="xl"
+        :disabled="isTrap"
         @click="onClick">
           Solve
       </v-btn>
