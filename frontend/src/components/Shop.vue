@@ -25,23 +25,23 @@ import Product from '@/components/Product.vue'
           <v-row>
             <v-col>
               <v-row>
-                <Product name="Claw Honing" itemId="ch" imagePath="/claw-honing.png" :price=300 />
-                <Product name="Rocket Fuel" itemId="rf" imagePath="/rocket-fuel.png" :price=300 />
-                <Product name="Iron Plating" itemId="iron" imagePath="/iron-plating.png" :price=300 />
-                <Product name="Book of Megatricks" itemId="mtrix" imagePath="/book-of-megatricks.png" :price=300 />
-                <Product name="Potion of Awesome Wings" itemId="wingpotmax" imagePath="/potion-of-awesome-wings.png" :price=300 />
+                <Product itemId="ch" />
+                <Product itemId="rf" />
+                <Product itemId="iron" />
+                <Product itemId="mtrix" />
+                <Product itemId="wingpotmax" />
               </v-row>
               <v-row>
-                <Product name="Claw Sharpening" itemId="cs" imagePath="/claw-sharpening.png" :price=100 />
-                <Product name="Gasoline" itemId="gas" imagePath="/gasoline.png" :price=100 />
-                <Product name="Copper Plating" itemId="wax" imagePath="/copper-plating.png" :price=100 />
-                <Product name="Book of Tricks" itemId="tricks" imagePath="/book-of-tricks.png" :price=100 />
-                <Product name="Potion of Stronger Wings" itemId="wingpot" imagePath="/potion-of-stronger-wings.png" :price=100 />
+                <Product itemId="cs" />
+                <Product itemId="gas" />
+                <Product itemId="wax" />
+                <Product itemId="tricks" />
+                <Product itemId="wingpot" />
               </v-row>
             </v-col>
             <v-col class="hpot-col">
               <v-row class="hpot-row">
-                <Product name="Healing Potion" itemId="hpot" imagePath="/healing-potion.png" :price=50 />
+                <Product itemId="hpot" />
               </v-row>
             </v-col>
           </v-row>

@@ -65,9 +65,9 @@ public class ShopController extends APIController {
             stored.setTimestamp(Instant.now().toString());
 
             if (response.getShoppingSuccess() == true) {
-                stored.setMessage("Purchased item: " + itemId);
+                stored.setMessage("purchaseSuccess " + itemId);
             } else {
-                stored.setMessage("Purchase failed: " + itemId);
+                stored.setMessage("purchaseFailure " + itemId);
             }
 
             String value = objectMapper.writeValueAsString(stored);

@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import axios from 'axios'
-import { useGameStore } from '@/stores/gameStore'
+import {useGameStore} from '@/stores/gameStore'
+import * as c from '@/const'
 
 const gameStore = useGameStore()
 
 const props = defineProps<{
-  name: string
   itemId: string
-  imagePath: string
-  price: number
 }>()
+
+const item = c.PRODUCTS[props.itemId]
 
 async function onClick() {
   try {
     const resp = await axios.post('/api/buy-item', {}, {
       params: { uuid: gameStore.game.uuid, itemId: props.itemId }
     })
+    const result = resp.data.message.split(' ')[0]
+    resp.data.message = c.PURCHASE[result].replace('{item}', item.name)
     gameStore.setGame(resp.data)
   } catch (e) {
     console.log(e)
@@ -24,10 +26,10 @@ async function onClick() {
 </script>
 
 <template>
-  <v-tooltip :text="`${props.name}: ${props.price} gold`" location="top" open-delay="100">
+  <v-tooltip :text="`${item.name}: ${item.price} gold`" location="top" open-delay="100">
     <template #activator="{ props: act }">
       <v-card v-bind="act" class="product-card" variant="elevated" border @click="onClick">
-        <img :src="props.imagePath" :alt="props.name" class="product-image" />
+        <img :src="item.image" :alt="item.name" class="product-image" />
       </v-card>
     </template>
   </v-tooltip>
