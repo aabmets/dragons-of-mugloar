@@ -55,7 +55,9 @@ const sortItems = [
     </div>
 
     <ActionMessage />
-    <MessageBoard class="message-board" :sort-dir="sortDir" :sort-key="sortKey" />
+    <div class="mb-container">
+      <MessageBoard class="message-board" :sort-dir="sortDir" :sort-key="sortKey" />
+    </div>
   </v-sheet>
 </template>
 
@@ -111,11 +113,16 @@ const sortItems = [
   transform: scaleX(-1.2) translateX(5px);
 }
 
-.message-board {
+.mb-container {
+  padding-bottom: 15px;
+}
+:deep(.message-board) {
   width: 100%;
-  height: 65.5vh;
+  max-height: 50vh;
   padding-top: 5px;
   background: none;
+  overflow: auto;
+  min-height: 0;
 }
 
 .glass-sheet {

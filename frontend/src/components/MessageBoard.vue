@@ -89,8 +89,7 @@ watch(
 <style scoped>
 .message-board {
   width: 100%;
-  padding: 20px;
-  height: 100%;
+  padding: 0 20px 0 20px;
 }
 
 /* Animated list */
