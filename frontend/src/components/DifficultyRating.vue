@@ -28,7 +28,7 @@ const displayProbability = computed(() =>
 </script>
 
 <template>
-  <v-tooltip :text="displayProbability" location="center" open-delay="80">
+  <v-tooltip :text="displayProbability" location="center" open-delay="300">
     <template #activator="{ props: tip }">
       <div class="difficulty" v-bind="tip" :aria-label="displayProbability">
         <v-rating

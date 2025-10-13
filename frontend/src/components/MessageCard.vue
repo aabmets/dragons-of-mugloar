@@ -15,7 +15,6 @@ async function onClick() {
     const resp = await axios.post('/api/solve-message', {}, {
       params: { uuid: gameStore.game.uuid, adId: props.ad.adId }
     })
-    console.log(resp.data)
     gameStore.setGame(resp.data)
   } catch (e) {
     console.log(e)
@@ -24,14 +23,14 @@ async function onClick() {
 </script>
 
 <template>
-  <v-card class="ad-card" variant="elevated">
+  <v-card class="ad-card" variant="elevated" border>
     <div class="ad-row">
       <div class="ad-message">
         <div class="ad-message">{{ ad.message }}</div>
       </div>
 
       <div class="ad-meta">
-        <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left" open-delay="80">
+        <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left" open-delay="300">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
               <img class="pill-icon" src="/coin.png" alt="coin" />
@@ -39,7 +38,7 @@ async function onClick() {
             </div>
           </template>
         </v-tooltip>
-        <v-tooltip :text="`Expires in: ${ad.expiresIn} turns`" location="left" open-delay="80">
+        <v-tooltip :text="`Expires in: ${ad.expiresIn} turns`" location="left" open-delay="300">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
               <img class="pill-icon" src="/stopwatch.png" alt="stopwatch" />
@@ -100,12 +99,13 @@ async function onClick() {
   gap: 6px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.1);
 }
-.pill-value { font-weight: 600; }
+.pill-value {
+  font-weight: 600;
+}
 .pill-icon {
   width: 20px;
   height: 20px;
-  display: block;
 }
 </style>

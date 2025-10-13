@@ -108,13 +108,13 @@ watch(
 .ads-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   max-height: 100%;
   overflow-y: auto;
 }
 
 .ad-wrapper {
   will-change: transform, opacity;
+  padding: 0 5px 7px 5px;
 }
 
 .error {

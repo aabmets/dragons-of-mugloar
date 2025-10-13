@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import StatusDisplay from '@/components/StatusDisplay.vue'
 import MessageBoard from '@/components/MessageBoard.vue'
+import Shop from '@/components/Shop.vue'
 import { mdiArrowDown } from '@mdi/js'
 import type * as t from '@/types'
 
@@ -18,39 +19,69 @@ const sortItems = [
 <template>
   <v-sheet class="mx-auto my-6 glass-sheet" max-width="600" rounded="lg">
     <div class="toolbar-top">
-      <img src="/avatar.png" alt="avatar" class="avatar" />
-      <StatusDisplay />
+      <div class="toolbar-left">
+        <img src="/avatar.png" alt="avatar" class="avatar" />
+        <StatusDisplay />
+      </div>
 
-      <div class="sort-stack">
-        <v-select
-          v-model="sortKey"
-          :items="sortItems"
-          label="Sort by"
-          variant="solo"
-          density="comfortable"
-          class="sort-control"
-          hide-details
-        />
-        <v-btn
-          size="small"
-          variant="tonal"
-          class="sort-control"
-          @click="sortDir = sortDir === 'asc' ? 'desc' : 'asc'">
-            <v-icon :icon="mdiArrowDown" class="mr-2" />
-            {{ sortDir === 'asc' ? 'Increasing' : 'Decreasing' }}
-        </v-btn>
+      <div class="toolbar-center">
+        <Shop />
+      </div>
+
+      <div class="toolbar-right">
+        <div class="sort-stack">
+          <v-select
+            v-model="sortKey"
+            :items="sortItems"
+            label="Sort by"
+            variant="solo"
+            density="comfortable"
+            class="sort-control"
+            hide-details
+          />
+          <v-btn
+            size="small"
+            variant="tonal"
+            class="sort-control"
+            @click="sortDir = sortDir === 'asc' ? 'desc' : 'asc'">
+              <v-icon :icon="mdiArrowDown" class="mr-2" />
+              {{ sortDir === 'asc' ? 'Increasing' : 'Decreasing' }}
+          </v-btn>
+        </div>
       </div>
     </div>
 
-    <MessageBoard
-      class="message-board"
-      :sort-dir="sortDir"
-      :sort-key="sortKey"
-    />
+    <MessageBoard class="message-board" :sort-dir="sortDir" :sort-key="sortKey" />
   </v-sheet>
 </template>
 
 <style scoped>
+.toolbar-top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: start;
+}
+
+.toolbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.toolbar-right {
+  justify-self: end;
+}
+
 .avatar {
   margin: 20px 0 0 20px ;
   padding: 3px;
