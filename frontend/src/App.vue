@@ -5,10 +5,12 @@ import GameBoard from '@/components/GameBoard.vue'
 import LeaderBoard from '@/components/LeaderBoard.vue'
 import NewGameButton from '@/components/NewGameButton.vue'
 import FloatingDock from '@/components/FloatingDock.vue'
+import { useGameStore } from '@/stores/gameStore'
 import * as utils from '@/utils'
 
 const playingGame = ref(false)
 const ldbRef = ref<HTMLElement | null>(null)
+const gameStore = useGameStore()
 
 const motion = useMotion(ldbRef, {
   initial: { y: 0, opacity: 1 },
@@ -27,6 +29,11 @@ async function hideLeaderboard() {
   await utils.sleep(200)
   playingGame.value = true
 }
+
+function resetGame() {
+  playingGame.value = false
+  gameStore.reset()
+}
 </script>
 
 <template>
@@ -39,6 +46,7 @@ async function hideLeaderboard() {
             src="/logo.png"
             :class="['site-logo', { 'site-logo--small': playingGame }]"
             alt="Dragons of Mugloar"
+            @click="resetGame"
           />
       </div>
       <div v-if="!playingGame" class="cta-group" ref="ldbRef">
@@ -76,6 +84,7 @@ html, body { height: 100%; }
 }
 .site-logo--small {
   max-height: 100px;
+  cursor: pointer;
 }
 .cta-group {
   display: flex;

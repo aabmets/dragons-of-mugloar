@@ -20,5 +20,8 @@ export const useGameStore = defineStore('game-state', {
     bumpTurn() {
         this.game.turn += 1
     },
+    reset() {
+      this.$reset()
+    }
   }
 })
