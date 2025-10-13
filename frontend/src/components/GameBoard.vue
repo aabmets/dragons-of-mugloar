@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import StatusDisplay from '@/components/StatusDisplay.vue'
 import MessageBoard from '@/components/MessageBoard.vue'
+import ActionMessage from "@/components/ActionMessage.vue";
 import Shop from '@/components/Shop.vue'
 import { mdiArrowDown } from '@mdi/js'
 import type * as t from '@/types'
@@ -53,6 +54,7 @@ const sortItems = [
       </div>
     </div>
 
+    <ActionMessage />
     <MessageBoard class="message-board" :sort-dir="sortDir" :sort-key="sortKey" />
   </v-sheet>
 </template>
