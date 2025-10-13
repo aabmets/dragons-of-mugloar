@@ -26,3 +26,9 @@ export type MessageBoard = Advertisement[]
 
 export type SortKey = 'probability' | 'reward' | 'expiresIn'
 export type SortDir = 'asc' | 'desc'
+
+export interface Reputation {
+    people: number
+    state: number
+    underworld: number
+}
