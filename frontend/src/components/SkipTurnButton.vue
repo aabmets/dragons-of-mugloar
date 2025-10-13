@@ -9,7 +9,12 @@ async function onClick() {
     await axios.post('/api/skip-turn', {}, {
       params: { gameId: gameStore.game.gameId }
     })
-    gameStore.bumpTurn()
+    gameStore.setGame({
+      ...gameStore.game,
+      turn: gameStore.game.turn + 1,
+      success: null,
+      message: null
+    })
   } catch (e) {
     console.log(e)
   }

@@ -17,9 +17,6 @@ export const useGameStore = defineStore('game-state', {
     setReputation(payload: t.Reputation | null) {
       this.reputation = payload
     },
-    bumpTurn() {
-        this.game.turn += 1
-    },
     reset() {
       this.$reset()
     }

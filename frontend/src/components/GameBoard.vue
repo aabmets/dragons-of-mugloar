@@ -8,7 +8,7 @@ import { mdiArrowDown } from '@mdi/js'
 import type * as t from '@/types'
 
 const sortKey = ref<t.SortKey>('probability')
-const sortDir = ref<t.SortDir>('desc')
+const sortDir = ref<t.SortDir>('asc')
 
 const sortItems = [
   { title: 'Reward', value: 'reward' },

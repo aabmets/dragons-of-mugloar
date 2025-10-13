@@ -4,7 +4,9 @@ import { useGameStore } from "@/stores/gameStore.ts";
 
 const gameStore = useGameStore()
 
-const alertText = computed(() => gameStore.game.message || "No actions taken yet.")
+const defaultText = "The message board looms over you menacingly..."
+const alertText = computed(() => gameStore.game.message || defaultText)
+const isDefaultText = computed(() => alertText.value === defaultText);
 const alertType = computed(() => {
   if (typeof gameStore.game.success === 'boolean') {
     return gameStore.game.success ? "success" : "error"
@@ -21,6 +23,7 @@ const alertType = computed(() => {
     density="comfortable"
     variant="tonal"
     elevation="4"
+    :style="{ fontStyle: isDefaultText ? 'italic' : 'normal' }"
   />
 </template>
 
