@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { mdiShoppingOutline } from '@mdi/js'
+import { mdiBarn } from '@mdi/js'
 import Product from '@/components/Product.vue'
+import SkipTurnButton from "@/components/SkipTurnButton.vue";
 </script>
 
 <template>
@@ -9,17 +10,17 @@ import Product from '@/components/Product.vue'
     <v-btn
       v-bind="activatorProps"
       class="shop-btn"
-      text="Open Shop"
+      text="Go to Tavern"
       variant="flat"
       :icon="true"
       elevation="2"
       color="teal-lighten-1">
-        <v-icon :icon="mdiShoppingOutline" size="36" />
+        <v-icon :icon="mdiBarn" size="36" />
     </v-btn>
   </template>
 
   <template v-slot:default="{ isActive }">
-    <v-card title="Shop" subtitle="Hover to read product details, click to buy.">
+    <v-card title="Tavern" subtitle="Hover to read product details, click to buy.">
       <v-card-text style="padding-bottom: 10px">
         <v-container>
           <v-row>
@@ -49,7 +50,8 @@ import Product from '@/components/Product.vue'
       </v-card-text>
 
       <v-card-actions>
-        <v-btn text="Close Shop" variant="tonal" border @click="isActive.value = false"/>
+        <SkipTurnButton />
+        <v-btn text="Exit Tavern" variant="tonal" border @click="isActive.value = false"/>
       </v-card-actions>
     </v-card>
   </template>

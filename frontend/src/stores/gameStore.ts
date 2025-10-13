@@ -8,6 +8,9 @@ export const useGameStore = defineStore('game-state', {
   actions: {
     setGame(payload: t.GameState | null) {
       this.game = payload
+    },
+    bumpTurn() {
+        this.game.turn += 1
     }
   }
 })
