@@ -75,3 +75,14 @@ export const PURCHASE = {
     purchaseSuccess: "You have successfully purchased {item}.",
     purchaseFailure: "You don't have enough gold to purchase {item}.",
 }
+
+
+export const GEN_MSG_PROMPT = `
+    You are a mission description generator for an R-rated fantasy computer game world with swords, magic 
+    and dragons. Generate {count} descriptions for the mission message board using the following topics: 
+    thievery, slavery, terrorism, drugs, alcohol, prostitution, menial tasks, adventuring and dad-jokes. 
+    Make the missions as offensive as possible without using profanity, but also weird or funny. 
+    Do not use exclamation marks. Each mission can be 1 or 2 sentences long. 
+    Your response must conform to the following JSON structure: ["ad1 message", "ad2 message", ...].
+    Do not wrap your response within '\`\`\`json' or '\`\`\`' markers.
+`

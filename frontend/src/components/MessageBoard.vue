@@ -4,6 +4,7 @@ import axios from 'axios'
 import MessageCard from '@/components/MessageCard.vue'
 import { useGameStore } from '@/stores/gameStore'
 import type * as t from '@/types'
+import * as utils from '@/utils'
 import * as c from '@/const'
 
 const emit = defineEmits<{ (e: 'loaded'): void }>()
@@ -15,6 +16,8 @@ const props = defineProps<{
 const gameStore = useGameStore()
 const rowsRaw = ref<t.MessageBoard>([])
 const error = ref<string | null>(null)
+const aiMessages = ref<string[] | null>(null)
+const isRefilling = ref<boolean>(false)
 
 function probToNumber(p?: string) {
   const idx = c.PROBABILITIES.findIndex(x => x.toLowerCase() === (p || '').toLowerCase())
@@ -49,15 +52,39 @@ async function fetchMessages() {
     const res = await axios.get('/api/messages', {
       params: { gameId: gameStore.game.gameId }
     })
-    rowsRaw.value = res.data || []
+    const resData = res.data || []
+    if (aiMessages.value !== null && aiMessages.value.length > 0) {
+        utils.maybeReplaceMessage(rowsRaw.value, resData, aiMessages.value)
+    }
+    rowsRaw.value = resData
     error.value = null
   } catch (e: any) {
     error.value = e?.message ?? 'Failed to fetch message board'
   }
 }
 
+async function refillAIGeneratedMessages(count: number) {
+  if (isRefilling.value === true) return
+  console.log("Fetching AI generated messages...")
+
+  isRefilling.value = true
+  const prompt = c.GEN_MSG_PROMPT.replace('{count}', count)
+  const res = await axios.post('/api/query-ai', prompt, {
+    headers: { 'Content-Type': 'text/plain' },
+  })
+  if (typeof res.data === 'string') {
+    res.data = JSON.parse(res.data || [])
+  }
+  const base = aiMessages.value ?? []
+  aiMessages.value = base.concat(res.data)
+  isRefilling.value = false
+
+  console.log("AI generated messages fetched:", aiMessages.value)
+}
+
 onMounted(() => {
   fetchMessages()
+  refillAIGeneratedMessages(10)
 })
 
 watch(
@@ -65,6 +92,10 @@ watch(
   (newTurn, oldTurn) => {
     if (newTurn !== oldTurn && newTurn != null) {
       fetchMessages()
+      const count = aiMessages.value?.length
+      if (!count || count <= 5) {
+        refillAIGeneratedMessages(count)
+      }
     }
   },
   { immediate: false }

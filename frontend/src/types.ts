@@ -21,6 +21,8 @@ export interface Advertisement {
   encrypted?: number
   probability?: string
   decodedWith?: string
+  trapDetected?: boolean
+  hasAiMessage?: boolean
 }
 
 export type MessageBoard = Advertisement[]
@@ -32,4 +34,9 @@ export interface Reputation {
     people: number
     state: number
     underworld: number
+}
+
+export interface MsgBoardDiff {
+    add: MessageBoard;
+    remove: MessageBoard
 }

@@ -32,6 +32,13 @@ async function onClick() {
       </div>
 
       <div class="ad-meta">
+        <img
+          v-if="ad.hasAiMessage"
+          style="width: 25px; height: 25px;"
+          src="/ai.png"
+          alt="ai"
+        />
+
         <div v-if="isTrap">
           <v-tooltip text="Ambush alert!" location="left" open-delay="300">
             <template #activator="{ props: act }">
