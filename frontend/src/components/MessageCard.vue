@@ -34,6 +34,7 @@ async function onClick() {
       <div class="ad-meta">
         <img
           v-if="ad.hasAiMessage"
+          title="AI generated message"
           style="width: 25px; height: 25px;"
           src="/ai.png"
           alt="ai"
