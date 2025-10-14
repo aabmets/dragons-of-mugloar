@@ -53,7 +53,7 @@ watch(
 <template>
   <div class="rep-bars" role="group" aria-label="Reputations">
     <div v-for="bar in items" :key="bar.key" class="rep-row">
-      <div class="rep-bar" :title="`${bar.label}: ${valueLabel(bar.value)}`">
+      <div class="rep-bar" :title="`Reputation with the ${bar.label.toLowerCase()}`">
 
           <div class="rep-track rep-track-left">
             <div class="rep-track-content rep-track-content-left">
