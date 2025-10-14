@@ -11,7 +11,7 @@ const alertType = computed(() => {
   if (typeof gameStore.game.success === 'boolean') {
     return gameStore.game.success ? "success" : "error"
   }
-  return ''
+  return undefined
 })
 </script>
 
