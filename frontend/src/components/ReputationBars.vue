@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import axios from 'axios'
-import { computed, watch } from 'vue'
+// import axios from 'axios'
+// import { watch } from 'vue'
+import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useGameStore } from '@/stores/gameStore'
 
@@ -28,26 +29,30 @@ function valueLabel(v: number) {
   return v.toFixed(0)
 }
 
-async function fetchReputation() {
-  try {
-    const resp = await axios.get('/api/reputation', {
-      params: { gameId: gameStore.game.gameId }
-    })
-    gameStore.setReputation(resp.data[0])
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-watch(
-  () => gameStore.game?.turn,
-  (newTurn, oldTurn) => {
-    if (newTurn !== oldTurn && newTurn != null) {
-      fetchReputation()
-    }
-  },
-  { immediate: false }
-)
+// This code is disabled until the downstream reputation provider
+// https://dragonsofmugloar.com/api/v2/:gameId/investigate/reputation
+// is fixed to not bump game turn on every reputation request.
+//
+// async function fetchReputation() {
+//   try {
+//     const resp = await axios.get('/api/reputation', {
+//       params: { gameId: gameStore.game.gameId }
+//     })
+//     gameStore.setReputation(resp.data[0])
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }
+//
+// watch(
+//   () => gameStore.game?.turn,
+//   (newTurn, oldTurn) => {
+//     if (newTurn !== oldTurn && newTurn != null) {
+//       fetchReputation()
+//     }
+//   },
+//   { immediate: false }
+// )
 </script>
 
 <template>

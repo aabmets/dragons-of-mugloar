@@ -6,9 +6,10 @@ const gameStore = useGameStore()
 
 async function onClick() {
   try {
-    await axios.post('/api/skip-turn', {}, {
+    const resp = await axios.get('/api/reputation', {
       params: { gameId: gameStore.game.gameId }
     })
+    gameStore.setReputation(resp.data[0])
     gameStore.setGame({
       ...gameStore.game,
       turn: gameStore.game.turn + 1,
