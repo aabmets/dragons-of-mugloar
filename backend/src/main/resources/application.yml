@@ -13,6 +13,10 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      model: ${OPENAI_MODEL:gpt-5-nano}
 
 logging:
   level:
@@ -39,6 +43,3 @@ management:
           include:
             - readinessState
             - redis
-
-openai:
-  api-key: ${OPENAI_API_KEY:}
