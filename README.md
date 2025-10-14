@@ -11,12 +11,13 @@ chmod 755 ./run.sh && ./run.sh
 
 
 ## System Architecture
-| Layer      | Technology                    | Purpose                                                                                                                                                                            |
-|------------|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Frontend   | Vue 3 + Vite + Vuetify        | Presents the playable interface, animation, and decision helpers such as difficulty visualisers, trap warnings, and a live leaderboard.                                            |
-| Backend    | Spring Boot 3 + WebFlux       | Proxies the official Mugloar API, augments responses (e.g., UUID tracking, message decoding), exposes OpenAPI-documented REST endpoints, and stores transient game state in Redis. |
-| Data cache | Redis 8                       | Keeps the latest `GameState` snapshots keyed by UUID so subsequent requests (solving ads, shopping) can reuse the original Mugloar `gameId`.                                       |
-| Tooling    | Docker Compose + Bun + Gradle | Provides reproducible local development with hot reload for both services.                                                                                                         |
+| Layer         | Port    | Technology                    | Purpose                                                                                                                                                                            |
+|---------------|---------|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Frontend      | `30011` | Vue 3 + Vite + Vuetify        | Presents the playable interface, animation, and decision helpers such as difficulty visualisers, trap warnings, and a live leaderboard.                                            |
+| Backend       | `40022` | Spring Boot 3 + WebFlux       | Proxies the official Mugloar API, augments responses (e.g., UUID tracking, message decoding), exposes OpenAPI-documented REST endpoints, and stores transient game state in Redis. |
+| Data cache    | `16379` | Redis 8                       | Keeps the latest `GameState` snapshots keyed by UUID so subsequent requests (solving ads, shopping) can reuse the original Mugloar `gameId`.                                       |
+| Data Cache UI | `15540` | Redis Insight                 | Provides visual interface into the stored game state for monitoring and experimentation purposes.                                                                                  |
+| Tooling       |         | Docker Compose + Bun + Gradle | Provides reproducible local development with hot reload for both services.                                                                                                         |
 
 The `run.sh` helper loads optional environment secrets (e.g., OpenAI key), checks Docker availability, and boots the Compose stack that wires the backend, frontend, Redis, and RedisInsight UI together for local play.
 
