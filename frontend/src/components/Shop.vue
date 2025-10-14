@@ -50,6 +50,14 @@ import SkipTurnButton from "@/components/SkipTurnButton.vue"
       </v-card-text>
 
       <v-card-actions>
+        <div>
+          <span style="font-size: 1.2rem;">
+            ⚠️
+          </span>
+          <span style="font-size: 0.8rem;">
+            Also updates reputation:
+          </span>
+        </div>
         <SkipTurnButton />
         <v-btn text="Exit Tavern" variant="tonal" border @click="isActive.value = false"/>
       </v-card-actions>
