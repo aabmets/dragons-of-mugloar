@@ -41,15 +41,17 @@ async function onClick() {
             </template>
           </v-tooltip>
         </div>
+
         <div v-if="ad.decodedWith">
-          <v-tooltip :text="`Decoded with ${ad.decodedWith} algorithm`" location="left" open-delay="300">
+          <v-tooltip :text="`Decoded with ${ad.decodedWith.toUpperCase()} algorithm`" location="left" open-delay="300">
             <template #activator="{ props: act }">
-              <div class="pill" v-bind="act">
-                <span class="pill-value">{{ ad.decodedWith }}</span>
+              <div class="pill pill-small" v-bind="act">
+                <span class="pill-value">{{ ad.decodedWith.toUpperCase() }}</span>
               </div>
             </template>
           </v-tooltip>
         </div>
+
         <v-tooltip :text="`Reward: ${ad.reward} gold`" location="left" open-delay="300">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
@@ -58,6 +60,7 @@ async function onClick() {
             </div>
           </template>
         </v-tooltip>
+
         <v-tooltip :text="`Expires in: ${ad.expiresIn} turns`" location="left" open-delay="300">
           <template #activator="{ props: act }">
             <div class="pill" v-bind="act">
@@ -127,8 +130,15 @@ async function onClick() {
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.1);
 }
+.pill-small {
+  padding: 2px 8px;
+  margin-bottom: 2px;
+}
 .pill-value {
   font-weight: 600;
+}
+.pill-small .pill-value {
+  font-size: 12px;
 }
 .pill-icon {
   width: 20px;
