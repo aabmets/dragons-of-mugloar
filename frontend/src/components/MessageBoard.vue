@@ -6,6 +6,7 @@ import { useGameStore } from '@/stores/gameStore'
 import type * as t from '@/types'
 import * as c from '@/const'
 
+const emit = defineEmits<{ (e: 'loaded'): void }>()
 const props = defineProps<{
   sortKey: t.SortKey,
   sortDir: t.SortDir,
@@ -67,6 +68,16 @@ watch(
     }
   },
   { immediate: false }
+)
+
+watch(
+  rowsRaw,
+  (newVal, oldVal) => {
+    if ((oldVal?.length ?? 0) === 0 && (newVal?.length ?? 0) > 0) {
+      emit('loaded')
+    }
+  },
+  { immediate: true }
 )
 </script>
 

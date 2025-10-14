@@ -16,53 +16,57 @@ const sortItems = [
   { title: 'Expiry', value: 'expiresIn' },
   { title: 'Difficulty', value: 'probability' },
 ] as const
+
+const mbReady = ref(false)
 </script>
 
 <template>
-  <v-sheet class="mx-auto my-6 glass-sheet" max-width="600" rounded="lg">
-    <div class="toolbar-top">
-      <div class="toolbar-left">
-        <img src="/avatar.png" alt="avatar" class="avatar" />
-        <StatusDisplay />
-      </div>
+  <v-expand-transition>
+    <v-sheet v-show="mbReady" class="mx-auto my-6 glass-sheet" max-width="600" rounded="lg">
+      <div class="toolbar-top">
+        <div class="toolbar-left">
+          <img src="/avatar.png" alt="avatar" class="avatar" />
+          <StatusDisplay />
+        </div>
 
-      <div class="toolbar-center">
-        <img src="/dragon.png" alt="dragon" class="dragon"/>
-        <Shop />
-        <img src="/dragon.png" alt="dragon" class="dragon-reverse"/>
-      </div>
+        <div class="toolbar-center">
+          <img src="/dragon.png" alt="dragon" class="dragon"/>
+          <Shop />
+          <img src="/dragon.png" alt="dragon" class="dragon-reverse"/>
+        </div>
 
-      <div class="toolbar-right">
-        <div class="toolbar-right-group">
-          <ReputationBars />
-          <div class="sort-stack">
-            <v-select
-              v-model="sortKey"
-              :items="sortItems"
-              label="Sort by"
-              variant="solo"
-              density="comfortable"
-              class="sort-control"
-              hide-details
-            />
-            <v-btn
-              size="small"
-              variant="tonal"
-              class="sort-control"
-              @click="sortDir = sortDir === 'asc' ? 'desc' : 'asc'">
-                <v-icon :icon="mdiArrowDown" class="mr-2" />
-                {{ sortDir === 'asc' ? 'Increasing' : 'Decreasing' }}
-            </v-btn>
+        <div class="toolbar-right">
+          <div class="toolbar-right-group">
+            <ReputationBars />
+            <div class="sort-stack">
+              <v-select
+                v-model="sortKey"
+                :items="sortItems"
+                label="Sort by"
+                variant="solo"
+                density="comfortable"
+                class="sort-control"
+                hide-details
+              />
+              <v-btn
+                size="small"
+                variant="tonal"
+                class="sort-control"
+                @click="sortDir = sortDir === 'asc' ? 'desc' : 'asc'">
+                  <v-icon :icon="mdiArrowDown" class="mr-2" />
+                  {{ sortDir === 'asc' ? 'Increasing' : 'Decreasing' }}
+              </v-btn>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <ActionMessage />
-    <div class="mb-container">
-      <MessageBoard class="message-board" :sort-dir="sortDir" :sort-key="sortKey" />
-    </div>
-  </v-sheet>
+      <ActionMessage />
+      <div class="mb-container">
+        <MessageBoard class="message-board" :sort-dir="sortDir" :sort-key="sortKey" @loaded="mbReady = true" />
+      </div>
+    </v-sheet>
+  </v-expand-transition>
 </template>
 
 <style scoped>
