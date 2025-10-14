@@ -35,7 +35,7 @@ async function onClick() {
         <div v-if="isTrap">
           <v-tooltip text="Ambush alert!" location="left" open-delay="300">
             <template #activator="{ props: act }">
-              <div class="pill trap" v-bind="act">
+              <div class="pill pill-small trap" v-bind="act">
                 <span class="pill-value">TRAP</span>
               </div>
             </template>

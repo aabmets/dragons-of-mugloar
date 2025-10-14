@@ -13,7 +13,7 @@ export function sleep(ms) {
 
 export function isTrapAdvert(ad: t.Advertisement) {
     return ad
-        && ad.message?.startsWith('Steal')
+        && ad.message?.toLowerCase().includes('steal')
         && c.PROBABILITIES.indexOf(ad.probability) <= 2
         && ad.reward > 150;
 }
