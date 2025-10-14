@@ -25,6 +25,7 @@ const emit = defineEmits<{
 
 const btnRef = ref<HTMLElement | null>(null)
 const showingForm = ref(false)
+const isLoading = ref(false)
 const playerName = ref('')
 
 const motion = useMotion(btnRef, {
@@ -53,6 +54,8 @@ async function onClick() {
 }
 
 async function onSubmit() {
+  if (isLoading.value) return
+  isLoading.value = true
   try {
     const resp = await axios.post('/api/new-game', {}, {
       params: { username: playerName.value }
@@ -60,6 +63,7 @@ async function onSubmit() {
     gameStore.setGame(resp.data)
     emit('new-game-started', resp.data)
   } catch (e) {
+    isLoading.value = false
     console.log(e)
   }
 }
@@ -89,8 +93,14 @@ async function onSubmit() {
           clearable
           @keyup.enter="onSubmit"
         />
-        <v-btn color="primary" :height="56" @click="onSubmit">
-          PLAY
+        <v-btn
+          color="primary"
+          width="50px"
+          :height="56"
+          :disabled="isLoading"
+          @click="onSubmit">
+            <span v-if="!isLoading">PLAY</span>
+            <v-progress-circular v-else indeterminate />
         </v-btn>
       </v-row>
     </v-sheet>
