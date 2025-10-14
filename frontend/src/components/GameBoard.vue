@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import StatusDisplay from '@/components/StatusDisplay.vue'
 import MessageBoard from '@/components/MessageBoard.vue'
 import ActionMessage from "@/components/ActionMessage.vue";
+import ReputationBars from '@/components/ReputationBars.vue'
 import Shop from '@/components/Shop.vue'
 import { mdiArrowDown } from '@mdi/js'
 import type * as t from '@/types'
@@ -32,24 +33,27 @@ const sortItems = [
       </div>
 
       <div class="toolbar-right">
-        <div class="sort-stack">
-          <v-select
-            v-model="sortKey"
-            :items="sortItems"
-            label="Sort by"
-            variant="solo"
-            density="comfortable"
-            class="sort-control"
-            hide-details
-          />
-          <v-btn
-            size="small"
-            variant="tonal"
-            class="sort-control"
-            @click="sortDir = sortDir === 'asc' ? 'desc' : 'asc'">
-              <v-icon :icon="mdiArrowDown" class="mr-2" />
-              {{ sortDir === 'asc' ? 'Increasing' : 'Decreasing' }}
-          </v-btn>
+        <div class="toolbar-right-group">
+          <ReputationBars />
+          <div class="sort-stack">
+            <v-select
+              v-model="sortKey"
+              :items="sortItems"
+              label="Sort by"
+              variant="solo"
+              density="comfortable"
+              class="sort-control"
+              hide-details
+            />
+            <v-btn
+              size="small"
+              variant="tonal"
+              class="sort-control"
+              @click="sortDir = sortDir === 'asc' ? 'desc' : 'asc'">
+                <v-icon :icon="mdiArrowDown" class="mr-2" />
+                {{ sortDir === 'asc' ? 'Increasing' : 'Decreasing' }}
+            </v-btn>
+          </div>
         </div>
       </div>
     </div>
@@ -88,6 +92,12 @@ const sortItems = [
   justify-self: end;
 }
 
+.toolbar-right-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .avatar {
   margin: 20px 0 0 20px ;
   padding: 3px;
@@ -103,14 +113,14 @@ const sortItems = [
   height: 100px;
   opacity: 0.15;
   pointer-events: none;
-  transform: scaleX(1.2) translateX(5px);
+  transform: scaleX(1.2) translateX(-15px);
 }
 
 .dragon-reverse {
   height: 100px;
   opacity: 0.15;
   pointer-events: none;
-  transform: scaleX(-1.2) translateX(5px);
+  transform: scaleX(-1.2) translateX(-15px);
 }
 
 .mb-container {
