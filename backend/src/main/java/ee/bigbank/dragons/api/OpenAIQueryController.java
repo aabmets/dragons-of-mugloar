@@ -15,7 +15,7 @@ public class OpenAIQueryController extends APIController {
         this.aiService = aiService;
     }
 
-    @PostMapping(path = "/ai-query", consumes = "text/plain", produces = "text/plain")
+    @PostMapping(path = "/query-ai", consumes = "text/plain", produces = "text/plain")
     @Operation(summary = "Query OpenAI with a text prompt and return the model's response")
     public ResponseEntity<String> queryPlain(@RequestBody String prompt) {
         if (prompt == null || prompt.isBlank()) {
