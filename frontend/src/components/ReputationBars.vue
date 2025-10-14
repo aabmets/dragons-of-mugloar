@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import axios from 'axios'
+import { computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useGameStore } from '@/stores/gameStore'
 
 const MAX = 10
 
-const game = useGameStore()
-const { reputation } = storeToRefs(game)
+const gameStore = useGameStore()
+const { reputation } = storeToRefs(gameStore)
 
 const items = computed(() => [
   { key: 'people',     label: 'People',     value: reputation.value.people },
@@ -26,6 +27,27 @@ function negPct(v: number) {
 function valueLabel(v: number) {
   return v.toFixed(0)
 }
+
+async function fetchReputation() {
+  try {
+    const resp = await axios.get('/api/reputation', {
+      params: { gameId: gameStore.game.gameId }
+    })
+    gameStore.setReputation(resp.data[0])
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+watch(
+  () => gameStore.game?.turn,
+  (newTurn, oldTurn) => {
+    if (newTurn !== oldTurn && newTurn != null) {
+      fetchReputation()
+    }
+  },
+  { immediate: false }
+)
 </script>
 
 <template>

@@ -1,33 +1,7 @@
 <script setup lang="ts">
-import { watch } from 'vue'
-import axios from 'axios'
 import { mdiBarn } from '@mdi/js'
 import Product from '@/components/Product.vue'
 import SkipTurnButton from "@/components/SkipTurnButton.vue"
-import { useGameStore } from '@/stores/gameStore'
-
-const gameStore = useGameStore()
-
-async function fetchReputation() {
-  try {
-    const resp = await axios.get('/api/reputation', {
-      params: { gameId: gameStore.game.gameId }
-    })
-    gameStore.setReputation(resp.data[0])
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-watch(
-  () => gameStore.game?.turn,
-  (newTurn, oldTurn) => {
-    if (newTurn !== oldTurn && newTurn != null) {
-      fetchReputation()
-    }
-  },
-  { immediate: false }
-)
 </script>
 
 <template>
