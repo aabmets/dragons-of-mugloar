@@ -15,5 +15,5 @@ export function isTrapAdvert(ad: t.Advertisement) {
     return ad
         && ad.message?.toLowerCase().includes('steal')
         && c.PROBABILITIES.indexOf(ad.probability) <= 2
-        && ad.reward > 150;
+        && ad.reward > 120;
 }
