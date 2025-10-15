@@ -11,7 +11,7 @@ import ViteFonts from 'unplugin-fonts/vite'
 export default defineConfig({
   server: {
     host: process.env.SERVER_HOST,
-    port: process.env.SERVER_PORT,
+    port: Number.parseInt(process.env.SERVER_PORT || '8080'),
     strictPort: true,
     proxy: {
       "/api": {

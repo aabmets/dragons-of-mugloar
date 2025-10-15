@@ -6,9 +6,16 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      environment: 'jsdom',
+      environment: 'happy-dom',
+      setupFiles: ['./tests/setup.ts'],
       exclude: [...configDefaults.exclude, 'e2e/**'],
+      server: {
+        deps: {
+          inline: ['vuetify']
+        }
+      },
       root: fileURLToPath(new URL('./', import.meta.url)),
+      css: true,
     },
   }),
 )
