@@ -55,7 +55,7 @@ import SkipTurnButton from "@/components/SkipTurnButton.vue"
             ⚠️
           </span>
           <span style="font-size: 0.8rem;">
-            Skipping a turn also updates reputation
+            Also updates reputation:
           </span>
         </div>
         <SkipTurnButton />
