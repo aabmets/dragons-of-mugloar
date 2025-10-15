@@ -35,4 +35,5 @@ cd "$DOCKER_DIR"
 
 printf "Running: docker compose up -d in %s\n\n" "$DOCKER_DIR"
 docker compose up -d
-echo ''
+
+printf '\nNavigate in your browser to http://localhost:30011 to play the game!\n\n'
