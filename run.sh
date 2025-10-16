@@ -10,7 +10,7 @@ if [ -f "$ENV_FILE" ]; then
   set +a
 fi
 
-if [ "${OPENAI_API_KEY:-}" = "" ]; then
+if [ -z "${OPENAI_API_KEY:-}" ] || [ "${OPENAI_API_KEY:-}" = "none" ]; then
   read -r -s -p "Enter an OpenAI API key to enable all app features (or press Enter to skip): " api_key
   echo
   if [ -n "${api_key:-}" ]; then
@@ -18,7 +18,7 @@ if [ "${OPENAI_API_KEY:-}" = "" ]; then
     set -a; source "$ENV_FILE"; set +a
     echo "Saved OpenAI API key to $ENV_FILE."
   else
-    : > "$ENV_FILE"
+    printf '%s=%s\n' OPENAI_API_KEY "none" > "$ENV_FILE"
     echo "Proceeding without an OpenAI API key."
   fi
 else
